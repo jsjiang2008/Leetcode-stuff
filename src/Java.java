@@ -424,22 +424,19 @@ public class Java {
     }
     //1679. Max Number of K-Sum Pairs
     public int maxOperations(int[] nums, int k) {
-        HashMap <Integer, Integer> valueToIndex = new HashMap<>();
-        HashSet <Integer> used = new HashSet<>();
-        int ans;
-        for (int i = 0; i < nums.length; i++) {
-            valueToIndex.put(nums[i], i);
-        }
-        while (used.size() != nums.length) {
-            int index;
-            for (int i: nums) {
-                if (!used.contains(i)) {
-                    index = i;
-                    used.add(i);
-                }
-            }
+        HashMap <Integer, Integer> valueToCount = new HashMap<>();
+        int ans = 0;
+        for (int num : nums) {
+            int num2 = k - num;
 
+            if (valueToCount.getOrDefault(num2, 0) > 0) {
+                ans++;
+                valueToCount.put(num2, valueToCount.get(num2) -1);
+            } else {
+                valueToCount.put(num, valueToCount.getOrDefault(num, 0) + 1);
+            }
         }
+        return ans;
     }
     //1732. Find the Highest Altitude
     public int largestAltitude(int[] gain) {
