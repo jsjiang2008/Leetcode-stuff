@@ -1,4 +1,7 @@
+import com.sun.source.tree.Tree;
+
 import javax.sound.sampled.EnumControl;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Java {
@@ -438,6 +441,28 @@ public class Java {
             } else ans[i] = nums[i/2 + n];
         }
         return ans;
+    }
+    //1657. Determine if Two Strings Are Close
+    public boolean closeStrings(String word1, String word2) {
+        if (word1.length() != word2.length()) return false;
+        int [] letters1 = new int[26];
+        int [] letters2 = new int[26];
+
+
+        for (char a: word1.toCharArray()) {
+            letters1[a - 'a']++;
+        }
+        for (char a: word2.toCharArray()) {
+            letters2[a - 'a']++;
+        }
+        for (int i = 0; i < 26; i++) {
+            if ((letters1[i] == 0) != (letters2[i] == 0)) return false;
+        }
+        Arrays.sort(letters1);
+        Arrays.sort(letters2);
+
+
+        return Arrays.equals(letters1, letters2);
     }
     //1679. Max Number of K-Sum Pairs
     public int maxOperations(int[] nums, int k) {
