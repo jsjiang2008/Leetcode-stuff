@@ -442,6 +442,23 @@ public class Java {
         }
         return ans;
     }
+    //1493. Longest Subarray of 1's After Deleting One Element
+    public int longestSubarray(int[] nums) {
+        int left = 0;
+        int zeroes = 0;
+        int largest = 0;
+        for (int right = 0; right < nums.length; right++) {
+            if (nums[right] == 0) zeroes++;
+            while (zeroes > 1) {
+                if (nums[left] == 0) {
+                    zeroes--;
+                }
+                left++;
+            }
+            largest = Math.max(largest, right - left);
+        }
+        return largest;
+    }
     //1657. Determine if Two Strings Are Close
     public boolean closeStrings(String word1, String word2) {
         if (word1.length() != word2.length()) return false;
