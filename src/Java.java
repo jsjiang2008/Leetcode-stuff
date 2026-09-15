@@ -559,7 +559,6 @@ public class Java {
         return ans;
     }
     //2265. Count Nodes Equal to Average of Subtree
-
     public class TreeNode {
       int val;
       TreeNode left;
@@ -584,6 +583,27 @@ public class Java {
     public int nodesOfSubtree(TreeNode root) {
         if (root == null) return 0;
         return 1 + nodesOfSubtree(root.left) + nodesOfSubtree(root.right);
+    }
+    //2352. Equal Row and Column Pairs
+    public int equalPairs(int[][] grid) {
+        HashMap <String, Integer> columns = new HashMap<>();
+        StringBuilder temp;
+        int ans = 0;
+        for (int[] value : grid) {
+            temp = new StringBuilder();
+            for (int i : value) {
+                temp.append(i).append(" ");
+            }
+            columns.put(temp.toString(), columns.getOrDefault(temp.toString(), 0) + 1);
+        }
+        for (int c = 0; c < grid[0].length; c++) {
+            temp = new StringBuilder();
+            for (int[] ints : grid) {
+                temp.append(ints[c]).append(" ");
+            }
+            if (columns.containsKey(temp.toString())) ans += columns.get(temp.toString());
+        }
+        return ans;
     }
     //2390. Removing Stars From a String
     public String removeStars(String s) {
